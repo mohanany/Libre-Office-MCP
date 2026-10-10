@@ -9,6 +9,12 @@ dependencies = [
 
 [project.scripts]
 libreoffice-mcp = "lo_mcp.__main__:main"
+libreoffice-mcp-writer = "lo_mcp.perapp:writer"
+libreoffice-mcp-calc = "lo_mcp.perapp:calc"
+libreoffice-mcp-impress = "lo_mcp.perapp:impress"
+libreoffice-mcp-draw = "lo_mcp.perapp:draw"
+libreoffice-mcp-base = "lo_mcp.perapp:base"
+libreoffice-mcp-math = "lo_mcp.perapp:math"
 
 [build-system]
 requires = ["setuptools>=68"]
