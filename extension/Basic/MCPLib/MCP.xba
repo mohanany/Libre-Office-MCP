@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="MCP" script:language="StarBasic">Option Explicit
+
+Global oMcpBridge As Object
+Global oMcpProvider As Object
+
+' XInstanceProvider implementation — serves the process context to
+' incoming URP clients (they ask for StarOffice.ComponentContext).
+Function prov_getInstance(sName As String) As Variant
+    If sName = "StarOffice.ComponentContext" Or sName = "StarOffice.ServiceManager" Then
+        prov_getInstance = GetDefaultContext.ServiceManager
+    Else
+        prov_getInstance = Nothing
+    End If
+End Function
+
+Sub OnStart
+    ' Bound to OnStartApp via Events.xcu. Opens a UNO acceptor on
+    ' localhost:2002 so `python -m lo_mcp` can attach without --accept=.
+    On Error GoTo Fail
+    Dim oFac As Object
+    oMcpProvider = CreateUnoListener("prov_", "com.sun.star.bridge.XInstanceProvider")
+    oFac = createUnoService("com.sun.star.bridge.BridgeFactory")
+    oMcpBridge = oFac.createBridge("libreoffice_mcp", "urp", _
+        "socket,host=localhost,port=2002", oMcpProvider, False)
+    Exit Sub
+Fail:
+    ' acceptor could not be opened (already running or disabled)
+End Sub
+</script:module>

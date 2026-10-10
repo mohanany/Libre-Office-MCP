@@ -10,7 +10,5 @@
   <publisher>
     <name xlink:href="https://github.com/mohanany/libreoffice-mcp">libreoffice-mcp</name>
   </publisher>
-  <dependencies>
-    <dep:OpenOffice.org-minimal-version value="24.2" dep:name="LibreOffice 24.2"/>
-  </dependencies>
+  <dependencies/>
 </description>

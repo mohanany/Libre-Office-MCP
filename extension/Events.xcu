@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:items xmlns:oor="http://openoffice.org/2001/registry"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <item oor:path="/org.openoffice.Office.Events/BoundEvents">
+    <node oor:name="Binding" oor:op="replace">
+      <prop oor:name="EventName" oor:op="fuse">
+        <value>OnStartApp</value>
+      </prop>
+      <prop oor:name="Type" oor:op="fuse">
+        <value>Script</value>
+      </prop>
+      <prop oor:name="Script" oor:op="fuse">
+        <value>vnd.sun.star.script:MCPLib.MCP.OnStart?language=Basic&amp;location=application</value>
+      </prop>
+    </node>
+  </item>
+</oor:items>

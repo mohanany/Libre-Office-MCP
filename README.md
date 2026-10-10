@@ -65,18 +65,41 @@ If LibreOffice is already running with
 `--accept=socket,host=localhost,port=2002;urp;` the server attaches to it
 (including your open documents); otherwise it spawns a headless instance.
 
-## Tools (v0.1 — common + Writer)
+## Tools (v0.1 — 45 tools)
 
-Common: `office_status`, `document_list`, `document_open`, `document_save`,
-`document_export`, `document_close`
-Writer: `writer_create`, `writer_read_text`, `writer_insert_text`,
-`writer_format_selection`, `writer_find_replace`, `writer_paragraph_count`
+| App | Tools |
+|---|---|
+| Common | `office_status` `document_list` `document_open` `document_save` `document_export` `document_close` |
+| Writer | `writer_create` `writer_read_text` `writer_insert_text` `writer_format_selection` `writer_find_replace` `writer_paragraph_count` |
+| Calc | `calc_create` `calc_set_cell` `calc_get_cell` `calc_get_range` `calc_set_values` `calc_list_sheets` `calc_recalculate` |
+| Impress | `impress_create` `impress_slide_count` `impress_add_slide` `impress_delete_slide` `impress_set_slide_layout` `impress_set_slide_text` `impress_get_slide_text` `impress_set_slide_notes` `impress_list_shapes` |
+| Draw | `draw_create` `draw_page_count` `draw_add_page` `draw_add_shape` `draw_list_shapes` `draw_set_shape_text` `draw_list_layers` |
+| Base | `base_list_tables` `base_list_queries` `base_list_columns` `base_query` `base_execute` `base_info` |
+| Math | `math_create` `math_set_formula` `math_get_formula` `math_export_mathml` |
+
+## Per-app servers
+
+Run only one application's toolset (+ common tools):
+
+```bash
+python -m lo_mcp calc        # or writer / impress / draw / base / math
+```
+
+or via installed console scripts: `libreoffice-mcp-calc`, etc.
+
+## `.oxt` extension
+
+`extension/` builds `libreoffice-mcp-bridge.oxt`
+(`scripts/build_oxt.sh`, install with `unopkg add`). A Basic macro bound to
+`OnStartApp` opens the UNO acceptor (`localhost:2002`) inside LibreOffice at
+startup — no `--accept=` flag needed, so the stdio server can attach to the
+running instance and its open documents.
 
 ## Roadmap
 
-- [ ] Calc module (cells, formulas, charts)
-- [ ] Impress module (slides, masters, shapes)
-- [ ] Draw module (shapes, layers, export)
-- [ ] `.oxt` extension packaging (auto-start UNO socket inside LibreOffice,
-      Tools ▸ MCP menu) — see `extension/`
+- [x] Writer, Calc, Impress, Draw modules
+- [x] Base module (read/query via SDBC), Math module
+- [x] Per-app MCP server entries
+- [x] `.oxt` extension (auto-opens UNO socket at startup)
+- [ ] Tools ▸ MCP menu (enable/disable, port, status)
 - [ ] Publish on extensions.libreoffice.org
