@@ -1,0 +1,18 @@
+[project]
+name = "libreoffice-mcp"
+version = "0.1.0"
+description = "Native MCP servers for LibreOffice applications (Writer, Calc, Impress, Draw) over UNO"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.10,<2.0",
+]
+
+[project.scripts]
+libreoffice-mcp = "lo_mcp.__main__:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["lo_mcp*"]
