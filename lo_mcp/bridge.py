@@ -142,7 +142,7 @@ class OfficeBridge:
             "calc": "private:factory/scalc",
             "impress": "private:factory/simpress",
             "draw": "private:factory/sdraw",
-            "base": "private:factory/sbase",
+            "base": "private:factory/sdatabase",
             "math": "private:factory/smath",
         }.get(kind, kind)
         props = [_prop("Hidden", True)] if hidden else []
